@@ -150,7 +150,7 @@ In short, when any group member entity is `unlocked`, the group will also be `un
 
 ### Sensor, number, and input_number groups
 
-- The group state is combined / calculated based on `type` selected to determine the minimum, maximum, latest (last), mean, median, range, product, standard deviation, or sum of the collected states.
+- The group state is combined / calculated based on `type` selected to determine the minimum, maximum, latest (last), first available, mean, median, range, product, standard deviation, or sum of the collected states.
 - Members can be any `sensor`, `number` or `input_number` holding numeric states.
 - States which are missing from the state machine do not make the state `unavailable` or `unknown`.
 - The group state is `unavailable` if no group member has a numeric state.
@@ -161,6 +161,7 @@ In short, when any group member entity is `unlocked`, the group will also be `un
    - When set to `true`, the group state is calculated as follows:
       - if at least one member has a numeric state: calculated according to the `type`
       - otherwise:  and set to `unknown`
+- The variable `ignore_non_numeric` can be combined with the type `first_available` to always take the first available numeric state from a group.
 
 ## Managing groups
 
@@ -343,7 +344,7 @@ all:
   type: boolean
   default: false
 type:
-  description: "Only available for `sensor` group. The type of sensor: `min`, `max`, `last`, `mean`, `median`, `range`, `product`, `stdev`, or `sum`."
+  description: "Only available for `sensor` group. The type of sensor: `min`, `max`, `last`, `first_available`, `mean`, `median`, `range`, `product`, `stdev`, or `sum`."
   type: string
   required: true
 ignore_non_numeric:
